@@ -1,23 +1,25 @@
 import React from "react";
 import style from './Navbar.module.css';
+import NavbarItem from "./NavbarItem/NavbarItem";
+import Friends from "../Friends/Friends";
 
-const Navbar = () => {
+const Navbar = (props) => {
+
+    console.log(props);
+
+    let NavbarElements = props.sidebarState.items
+        .map(item => <NavbarItem id={item.id} item={item.item} />);
+
+    let friends = props.dialogState.dialogs
+        .map(dialog => <Friends id={dialog.id} name={dialog.name} avatar={props.dialogState.avatars[dialog.id-1].avatar}/>);
+
     return (
         <nav className={style.nav}>
             <div className={style.item}>
-                <a href="/profile">Profile</a>
+                {NavbarElements}
             </div>
-            <div className={`${style.item} ${style.active}`}>
-                <a href="/dialogs">Messages</a>
-            </div>
-            <div className={style.item}>
-                <a href='/news'>News</a>
-            </div>
-            <div className={style.item}>
-                <a href='/music'>Music</a>
-            </div>
-            <div className={style.item}>
-                <a href='/settings'>Settings</a>
+            <div className={style.friendsWrapper}>
+                {friends}
             </div>
         </nav>
     )

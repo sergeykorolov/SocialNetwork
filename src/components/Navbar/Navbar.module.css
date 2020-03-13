@@ -1,13 +1,20 @@
 .nav {
     grid-area: nav;
     background-color: dodgerblue;
+    padding: 10px;
 }
 
-.item {
+.item a {
     color: azure;
+    text-decoration: none;
 }
 
-.item.active {
+.item a.activeLink {
     color: gold;
+}
+
+.friendsWrapper {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
 }
 

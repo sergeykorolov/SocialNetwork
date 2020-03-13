@@ -1,15 +1,13 @@
 import React from "react";
-import style from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const Profile = () => {
+const Profile = (props) => {
+
     return (
         <div>
-            <div>
-                <img src="https://www.appiapolis.it/wp-content/uploads/2020/01/DSCF2192-1024x319.jpg"/>
-            </div>
-            <div>ava + description</div>
-            <MyPosts />
+            <ProfileInfo />
+            <MyPosts posts={props.state.posts}/>
         </div>
     )
 }
