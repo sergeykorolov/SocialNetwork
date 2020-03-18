@@ -1,3 +1,4 @@
+import {rerenderEntireTree} from "../render";
 
 let state = {
     profilePage: {
@@ -28,7 +29,7 @@ let state = {
             {id: 3, avatar: 'https://cdn.hipwallpaper.com/i/51/71/BolWfG.png'},
             {id: 4, avatar: 'https://avatarfiles.alphacoders.com/111/thumb-111509.png'},
             {id: 5, avatar: 'https://res.cloudinary.com/teepublic/image/private/s--rcqc6v7Y--/t_Preview/b_rgb:191919,c_limit,f_jpg,h_630,q_90,w_630/v1513725878/production/designs/2198655_1.jpg'},
-            {id: 6, avatar: 'https://lh3.googleusercontent.com/proxy/v8iQNpBbetRFLVEggZaSeECYiEVhqs0MgCJsWTZMA7hM5wFlIwWMZq9LeMtf2Ztd9_D0bsXWmVs_UIzegyZADg2gUHeR0bnHNSG1t6FSslGCESdQSVn_-rZKsjkCctsGKdQA'}
+            {id: 6, avatar: 'https://i.pinimg.com/564x/8c/e1/7f/8ce17f240c7683e1f531c677a5fb8109.jpg'}
         ]
     },
     sidebar: {
@@ -40,7 +41,31 @@ let state = {
             {id: 5, item: 'Settings'},
             {id: 6, item: 'Friends'}
         ]
-    }
+    },
+};
+
+export let addPost = (postMessage) => {
+    let newPost = {
+        id: 3,
+        message: postMessage,
+        likesCount: 0
+    };
+
+    state.profilePage.posts.push(newPost);
+    rerenderEntireTree(state);
+};
+
+let set = '';
+
+export let stringSet = (symbol) => {
+    set = set + symbol;
+    let newPost = {
+        id: 3,
+        message: symbol,
+        likesCount: 0
+    };
+    state.profilePage.posts.push(newPost);
+    rerenderEntireTree(state);
 }
 
 export default state;
