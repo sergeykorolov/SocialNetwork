@@ -8,6 +8,6 @@ const Message = (props) => {
             <span>{props.message}</span>
         </div>
     )
-}
+};
 
 export default Message;
