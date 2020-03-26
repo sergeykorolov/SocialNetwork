@@ -2,24 +2,23 @@ import React from "react";
 import style from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {addMessageCreator, updateNewMessageTextCreator} from "../../redux/dialogsReducer";
 
 const Dialogs = (props) => {
 
-    let dialogsElements = props.dialogPage.dialogs
-        .map(dialog => <DialogItem id={dialog.id} name={dialog.name} avatar={props.dialogPage.avatars[dialog.id-1].avatar}/>);
-    let messagesElements = props.dialogPage.messages
-        .map(message => <Message message={message.message} avatar={props.dialogPage.avatars[message.id-1].avatar} />);
+    let dialogsElements = props.dialogs
+        .map(dialog => <DialogItem id={dialog.id} name={dialog.name} avatar={props.avatars[dialog.id-1].avatar}/>);
+    let messagesElements = props.messages
+        .map(message => <Message message={message.message} avatar={props.avatars[message.id-1].avatar} />);
 
     let newMessageElement = React.createRef();
 
-    let addMessage = () => {
-        props.dispatch (addMessageCreator());
+    let onAddMessage = () => {
+        props.addMessage();
     }
 
-    let onMessageChange = (event) => {
-        let text = event.target.value;
-        props.dispatch(updateNewMessageTextCreator(text));
+    let onMessageChange = () => {
+        let text = newMessageElement.current.value;
+        props.updateNewMessageText(text);
     }
 
     return (
@@ -33,10 +32,10 @@ const Dialogs = (props) => {
             <div>
                 <textarea
                     placeholder='Enter your message'
-                    onChange={onMessageChange}
+                    onChange={ onMessageChange }
                     ref={newMessageElement}
-                    value={props.dialogPage.newMessageText} />
-                <button onClick={addMessage}>Отправить</button>
+                    value={props.newMessageText} />
+                <button onClick={ onAddMessage }>Отправить</button>
             </div>
         </div>
     )
