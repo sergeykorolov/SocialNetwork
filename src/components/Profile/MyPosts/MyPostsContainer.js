@@ -8,7 +8,6 @@ let mapStateToProps = (state) => {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText,
         avatars: state.profilePage.avatars,
-        newMessageText: state.profilePage.newMessageText
     }
 }
 
