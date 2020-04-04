@@ -3,10 +3,11 @@ let initialState = {
     items: [
         {id: 1, item: 'Profile'},
         {id: 2, item: 'Messages'},
-        {id: 3, item: 'News'},
-        {id: 4, item: 'Music'},
-        {id: 5, item: 'Settings'},
-        {id: 6, item: 'Friends'}
+        {id: 3, item: 'Users'},
+        {id: 4, item: 'News'},
+        {id: 5, item: 'Music'},
+        {id: 6, item: 'Settings'},
+        {id: 7, item: 'Friends'}
     ]
 }
 

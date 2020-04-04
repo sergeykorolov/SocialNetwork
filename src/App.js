@@ -21,10 +21,10 @@ const App = () => {
                        render={() => <DialogsContainer/>}/>
                 <Route path='/profile'
                        render={() => <Profile/>}/>
-                <Route path='/news' component={News}/>
-                <Route path='/music' component={Music}/>
                 <Route path='/users'
                        render={() => <UsersContainer />}/>
+                <Route path='/news' component={News}/>
+                <Route path='/music' component={Music}/>
                 <Route path='/settings' component={Settings}/>
                 <Route path='/friends'
                        render={() => <FriendsContainer/>}/>
