@@ -3,8 +3,6 @@ import style from "./Friends.module.css";
 
 const Friends = (props) => {
 
-    console.log(props)
-
     return (
         <div className={style.friend}>
             <img src={props.avatar}/>

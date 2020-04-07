@@ -29,7 +29,7 @@ const usersReducer = (state = initialState, action) => {
         case UNFOLLOW:
             return {
                 ...state,                                  // копируем state
-                users: state.users.map(user => {          // копируем массив users
+                users: state.users.map(user => {           // копируем массив users
                     if (user.id === action.userId) {
                         return {...user, followed: false}  // копируем объект, меняем значение
                     }                                      // и возвращаем измененный объект
