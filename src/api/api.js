@@ -1,5 +1,6 @@
 import * as axios from "axios";
 
+// объект с дефолтными настройками запроса
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
