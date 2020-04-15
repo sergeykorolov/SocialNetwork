@@ -3,6 +3,7 @@ import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow} fro
 import React from 'react';
 import Users from './Users';
 import Preloader from "../common/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class UsersContainer extends React.Component {
 
@@ -32,7 +33,7 @@ class UsersContainer extends React.Component {
     }
 }
 
-/* принимает весь state и возвращает объект users (массив)*/
+/* принимает весь state */
 let mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,   // достаем из state массив users
@@ -43,6 +44,8 @@ let mapStateToProps = (state) => {
         followingInProgress: state.usersPage.followingInProgress,
     }
 }
+
+let withRedirect = withAuthRedirect(UsersContainer);
 
 /*
    connect отрисовывает компонент usersContainer
@@ -57,4 +60,4 @@ export default connect(mapStateToProps, {
     setCurrentPage,
     toggleFollowingProgress,
     getUsers
-})(UsersContainer);
+})(withRedirect);
