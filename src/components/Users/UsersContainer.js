@@ -4,6 +4,7 @@ import React from 'react';
 import Users from './Users';
 import Preloader from "../common/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component {
 
@@ -45,19 +46,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-let withRedirect = withAuthRedirect(UsersContainer);
-
-/*
-   connect отрисовывает компонент usersContainer
-   mapStateToProps прокидывает в props данные
-   объект с колбэками прокидывается в props
-   когда изменяется что-либо в state срабатывает функция connect
-   если в mapStateToProps приходит объект без изменений, то компонент не перерисовывается
-*/
-export default connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsers
-})(withRedirect);
+export default compose(
+    connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers }),
+    withAuthRedirect
+)(UsersContainer)
