@@ -36,6 +36,9 @@ export const authApi = {
             .then(response => {
                 return response.data;
             })
+    },
+    loginUser(email, password, rememberMe, captcha) {
+        return instance.post(`auth/login`, {email: email, password: password, rememberMe: rememberMe, captcha: captcha})
     }
 }
 
@@ -45,6 +48,12 @@ export const profileApi = {
             .then(response => {
                 return response.data;
             })
+    },
+    getStatus(userId) {
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus(status) {
+        return instance.put(`profile/status`, {status: status})
     }
 }
 

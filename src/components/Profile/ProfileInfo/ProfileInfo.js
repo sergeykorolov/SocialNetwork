@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./ProfileInfo.module.css";
-import Preloader from "../../common/Preloader";
+import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileStatus from "./ProfileStatus";
 
@@ -17,7 +17,7 @@ const ProfileInfo = (props) => {
             </div>
             <div className={style.descriptionBlock}>
                 <img src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto}/>
-                <ProfileStatus status={"Hello gays!!!"}/>
+                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 <div><b>Обо мне:</b> {props.profile.aboutMe}</div>
                 <div><b>Контакты:</b> {props.profile.contacts.facebook} {props.profile.contacts.vk} {props.profile.contacts.github}</div>
                 <div><b>Имя:</b> {props.profile.fullName}</div>
