@@ -8,7 +8,9 @@ const Header = (props) => {
             <img src="https://www.nicepng.com/png/detail/194-1946707_logo-ss-lazio.png"/>
 
             <div className={style.loginBlock}>
-                {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
+                {props.isAuth
+                    ? <div>{props.login} - <button onClick={props.logout}>Log out</button></div>
+                    : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </header>
     )
