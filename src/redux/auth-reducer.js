@@ -25,18 +25,19 @@ const authReducer = (state = initialState, action) => {
 }
 
 // функции возвращают экшны (объект, у которого есть как минимум св-во type)
-export const setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, payload: {userId, email, login, isAuth }});
+export const setAuthUserData = (userId, email, login, isAuth) => ({
+    type: SET_USER_DATA,
+    payload: {userId, email, login, isAuth}
+});
 
-export const getAuthUserData = () => {
-    return (dispatch) => {
-        authApi.getAuthUserData()
-            .then(data => {
-                if(data.resultCode === 0){
-                    let {id, email, login} = data.data;
-                    dispatch(setAuthUserData(id, email, login, true));
-                }
-            });
-    }
+export const getAuthUserData = () => (dispatch) => {
+    return authApi.getAuthUserData()
+        .then(data => {
+            if (data.resultCode === 0) {
+                let {id, email, login} = data.data;
+                dispatch(setAuthUserData(id, email, login, true));
+            }
+        });
 }
 
 export const login = (email, password, rememberMe) => {
@@ -44,7 +45,7 @@ export const login = (email, password, rememberMe) => {
 
         authApi.login(email, password, rememberMe)
             .then(response => {
-                if(response.data.resultCode === 0){
+                if (response.data.resultCode === 0) {
                     dispatch(getAuthUserData());
                 } else {
                     let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
@@ -58,7 +59,7 @@ export const logout = () => {
     return (dispatch) => {
         authApi.logout()
             .then(response => {
-                if(response.data.resultCode === 0){
+                if (response.data.resultCode === 0) {
                     dispatch(setAuthUserData(null, null, null, false));
                 }
             });
