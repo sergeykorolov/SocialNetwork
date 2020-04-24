@@ -2,9 +2,3 @@
     width: 80px;
     border-radius: 25px;
 }
-
-.selectedPage {
-    font-weight: bold;
-    padding: 5px;
-    cursor: pointer;
-}

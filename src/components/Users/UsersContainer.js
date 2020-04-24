@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {follow, requestUsers, setCurrentPage, toggleFollowingProgress, unfollow} from '../../redux/usersReducer';
+import {follow, requestUsers, setCurrentPage, toggleFollowingProgress, unfollow} from '../../redux/users-reducer';
 import React from 'react';
 import Users from './Users';
 import Preloader from "../common/Preloader/Preloader";
@@ -14,13 +14,14 @@ import {
 
 class UsersContainer extends React.Component {
 
-    // вызывается после первой отрисовки компонеты (отправляет запрос на сервер)
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+        let {currentPage, pageSize} = this.props;
+        this.props.getUsers(currentPage, pageSize);
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.getUsers(pageNumber, this.props.pageSize);
+        let {pageSize} = this.props;
+        this.props.getUsers(pageNumber, pageSize);
     }
 
     render() {

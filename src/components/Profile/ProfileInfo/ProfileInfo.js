@@ -4,9 +4,9 @@ import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-const ProfileInfo = (props) => {
+const ProfileInfo = ({profile, status, updateStatus}) => {
 
-    if(!props.profile) {
+    if(!profile) {
         return <Preloader/>
     }
 
@@ -16,11 +16,11 @@ const ProfileInfo = (props) => {
                 <img src="https://www.appiapolis.it/wp-content/uploads/2020/01/DSCF2192-1024x319.jpg"/>
             </div>
             <div className={style.descriptionBlock}>
-                <img src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto}/>
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
-                <div><b>Обо мне:</b> {props.profile.aboutMe}</div>
-                <div><b>Контакты:</b> {props.profile.contacts.facebook} {props.profile.contacts.vk} {props.profile.contacts.github}</div>
-                <div><b>Имя:</b> {props.profile.fullName}</div>
+                <img src={profile.photos.large != null ? profile.photos.large : userPhoto}/>
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+                <div><b>Обо мне:</b> {profile.aboutMe}</div>
+                <div><b>Контакты:</b> {profile.contacts.facebook} {profile.contacts.vk} {profile.contacts.github}</div>
+                <div><b>Имя:</b> {profile.fullName}</div>
             </div>
         </div>
     )
