@@ -1,6 +1,6 @@
 import React from "react";
 
-class ProfileInfo extends React.Component {
+class ProfileStatus extends React.Component {
 
     state = {
         editMode: false,
@@ -54,4 +54,4 @@ class ProfileInfo extends React.Component {
     }
 }
 
-export default ProfileInfo;
+export default ProfileStatus;
