@@ -1,14 +1,12 @@
-import React, {Component} from 'react';
+import React, {Component, Suspense} from 'react';
 import './App.css';
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {BrowserRouter, Route, withRouter} from "react-router-dom";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import SidebarContainer from "./components/Navbar/SidebarContainer";
 import FriendsContainer from "./components/Friends/FriendsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {connect, Provider} from "react-redux";
@@ -16,6 +14,9 @@ import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import store from "./redux/redux-store";
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
 class App extends Component {
 
@@ -25,7 +26,7 @@ class App extends Component {
 
     render() {
 
-        if(!this.props.initialized){
+        if (!this.props.initialized) {
             return <Preloader/>
         }
 
@@ -33,21 +34,23 @@ class App extends Component {
             <div className='app-wrapper'>
                 <HeaderContainer/>
                 <SidebarContainer/>
-                <div className='app-wrapper-content'>
-                    <Route path='/messages'
-                           render={() => <DialogsContainer/>}/>
-                    <Route
-                        path='/profile/:userId?'
-                        render={() => <ProfileContainer/>}/>
-                    <Route path='/users'
-                           render={() => <UsersContainer/>}/>
-                    <Route path='/news' component={News}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/settings' component={Settings}/>
-                    <Route path='/friends'
-                           render={() => <FriendsContainer/>}/>
-                    <Route path='/login' render={() => <Login/>}/>
-                </div>
+                <Suspense fallback={<Preloader/>}>
+                    <div className='app-wrapper-content'>
+                        <Route path='/messages'
+                               render={() => <DialogsContainer/>}/>
+                        <Route
+                            path='/profile/:userId?'
+                            render={() => <ProfileContainer/>}/>
+                        <Route path='/users'
+                               render={() => <UsersContainer/>}/>
+                        <Route path='/news' component={News}/>
+                        <Route path='/music' component={Music}/>
+                        <Route path='/settings' component={Settings}/>
+                        <Route path='/friends'
+                               render={() => <FriendsContainer/>}/>
+                        <Route path='/login' render={() => <Login/>}/>
+                    </div>
+                </Suspense>
             </div>
         );
     }
@@ -64,7 +67,7 @@ let AppContainer = compose(
 const SocialNetworkJSApp = (props) => {
     return <BrowserRouter>
         <Provider store={store}>
-            <AppContainer />
+            <AppContainer/>
         </Provider>
     </BrowserRouter>
 }
