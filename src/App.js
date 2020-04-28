@@ -37,7 +37,7 @@ class App extends Component {
                     <Route path='/messages'
                            render={() => <DialogsContainer/>}/>
                     <Route
-                        path='/profile/:userId?'             // после : параметр, ?-означает что параметр не обязателен
+                        path='/profile/:userId?'
                         render={() => <ProfileContainer/>}/>
                     <Route path='/users'
                            render={() => <UsersContainer/>}/>
