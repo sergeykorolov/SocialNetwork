@@ -1,6 +1,6 @@
 **Social Network on React & Redux**
 
-Link to GitHub Pages: https://sergeykorolov.github.io/SocialNetwork/
+ссылка на GitHub Pages: https://sergeykorolov.github.io/SocialNetwork/
 
 данные тестового аккаунта:
 
