@@ -7,7 +7,7 @@ let initialState = {
         {id: 4, item: 'News'},
         {id: 5, item: 'Music'},
         {id: 6, item: 'Settings'},
-        {id: 7, item: 'Friends'}
+        {id: 7, item: 'Subscriptions'}
     ]
 }
 

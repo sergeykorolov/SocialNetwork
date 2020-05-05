@@ -14,7 +14,7 @@ let initialState = {
         {id: 2, message: 'Mmmm mmm'},
         {id: 3, message: 'Cartman Fat Ass'},
         {id: 4, message: 'You bastard!!!'},
-        {id: 1, message: 'Screw you gays, I am going home)'}
+        {id: 1, message: 'Screw you guys, I am going home)'}
     ],
     avatars: [
         {

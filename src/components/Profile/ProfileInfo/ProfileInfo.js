@@ -1,29 +1,68 @@
-import React from "react";
+import React, {useState} from "react";
 import style from "./ProfileInfo.module.css";
-import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-const ProfileInfo = ({profile, status, updateStatus}) => {
+const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto}) => {
 
-    if(!profile) {
-        return <Preloader/>
+    let [editMode, setEditMode] = useState(false);
+
+    const onMainPhotoSelected = (e) => {
+        if(e.target.files.length) {
+            savePhoto(e.target.files[0]);
+        }
     }
 
     return (
         <div>
-            <div>
-                <img src="https://www.appiapolis.it/wp-content/uploads/2020/01/DSCF2192-1024x319.jpg"/>
-            </div>
             <div className={style.descriptionBlock}>
-                <img src={profile.photos.large != null ? profile.photos.large : userPhoto}/>
+                <img src={profile.photos.large || userPhoto} className={style.mainPhoto}/>
+                {isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
-                <div><b>Обо мне:</b> {profile.aboutMe}</div>
-                <div><b>Контакты:</b> {profile.contacts.facebook} {profile.contacts.vk} {profile.contacts.github}</div>
-                <div><b>Имя:</b> {profile.fullName}</div>
+
+                {editMode
+                    ? <ProfileDataForm profile={profile}/>
+                    : <ProfileData profile={profile} goToEditMode={() => {setEditMode(true)}}/>}
+
             </div>
         </div>
     )
+}
+
+const ProfileData = ({profile, isOwner, goToEditMode}) => {
+    return (
+        <div>
+            {isOwner && <div><button onClick={goToEditMode}>edit</button></div>}
+            <div><b>Full name</b>: {profile.fullName}</div>
+            <div><b>Looking for a job</b>: {profile.lookingForAJob ? "yes" : "no"}</div>
+            {profile.lookingForAJob &&
+            <div><b>My professional skills</b>: {profile.lookingForAJobDescription}</div>}
+
+            <div><b>About me</b>: {profile.aboutMe}</div>
+            <div><b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
+                return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+            })}</div>
+        </div>
+    )
+}
+const ProfileDataForm = ({profile}) => {
+    return (
+        <div>
+            <div><b>Full name</b>: {profile.fullName}</div>
+            <div><b>Looking for a job</b>: {profile.lookingForAJob ? "yes" : "no"}</div>
+            {profile.lookingForAJob &&
+            <div><b>My professional skills</b>: {profile.lookingForAJobDescription}</div>}
+
+            <div><b>About me</b>: {profile.aboutMe}</div>
+            <div><b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
+                return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+            })}</div>
+        </div>
+    )
+}
+
+const Contact = ({contactTitle, contactValue}) => {
+    return <div className={style.contact}><b>{contactTitle}</b>: {contactValue}</div>
 }
 
 export default ProfileInfo;

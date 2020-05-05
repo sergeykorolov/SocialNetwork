@@ -3,8 +3,8 @@ import './App.css';
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
-import SidebarContainer from "./components/Navbar/SidebarContainer";
+import {HashRouter, Route, withRouter} from "react-router-dom";
+import NavbarContainer from "./components/Navbar/NavbarContainer";
 import FriendsContainer from "./components/Friends/FriendsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -33,7 +33,7 @@ class App extends Component {
         return (
             <div className='app-wrapper'>
                 <HeaderContainer/>
-                <SidebarContainer/>
+                <NavbarContainer/>
                 <Suspense fallback={<Preloader/>}>
                     <div className='app-wrapper-content'>
                         <Route path='/messages'
@@ -46,7 +46,7 @@ class App extends Component {
                         <Route path='/news' component={News}/>
                         <Route path='/music' component={Music}/>
                         <Route path='/settings' component={Settings}/>
-                        <Route path='/friends'
+                        <Route path='/subscriptions'
                                render={() => <FriendsContainer/>}/>
                         <Route path='/login' render={() => <Login/>}/>
                     </div>
@@ -65,11 +65,11 @@ let AppContainer = compose(
     connect(mapStateToProps, {initializeApp}))(App);
 
 const SocialNetworkJSApp = (props) => {
-    return <BrowserRouter>
+    return <HashRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 
 export default SocialNetworkJSApp;

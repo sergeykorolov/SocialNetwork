@@ -1,10 +1,11 @@
 import React from "react";
 import style from './Post.module.css';
+import userPhoto from "../../../../assets/images/user.png"
 
 const Post = (props) => {
     return (
         <div className={style.item}>
-            <img src="https://ubistatic19-a.akamaihd.net/ubicomstatic/en-gb/global/buy-now/512_mobile_292979.png"/>
+            <img src={userPhoto}/>
             {props.message}
             <div>
                 <span>like {props.like}</span>

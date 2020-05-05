@@ -4,16 +4,9 @@ import Friends from "./Friends";
 let mapStateToProps = (state) => {
     return {
         dialogsPage: state.dialogsPage
-
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-
-    }
-}
-
-const FriendsContainer = connect(mapStateToProps, mapDispatchToProps)(Friends);
+const FriendsContainer = connect(mapStateToProps)(Friends);
 
 export default FriendsContainer;

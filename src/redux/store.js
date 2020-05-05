@@ -63,7 +63,7 @@ let store = {
         },
     },
     _callSubscriber() {
-        console.log('State changed');
+
     },
 
     // не изменяют state

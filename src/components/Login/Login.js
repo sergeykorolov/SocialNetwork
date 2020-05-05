@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import style from "../common/FormsControls/FormsControls.module.css"
+import styleLogin from "./Login.module.css"
 
 const LoginForm = ({handleSubmit, error}) => {
     return (
@@ -20,6 +21,11 @@ const LoginForm = ({handleSubmit, error}) => {
             }
             <div>
                 <button>Login</button>
+            </div>
+            <div>
+                <div><b>данные тестового аккаунта:</b></div>
+                <div>Email: free@samuraijs.com</div>
+                <div>Password: free</div>
             </div>
         </form>
     )
@@ -36,7 +42,7 @@ const Login = (props) => {
         return <Redirect to={"/profile"}/>
     }
 
-    return <div>
+    return <div className={styleLogin.loginBlock}>
             <h1>Login</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
         </div>

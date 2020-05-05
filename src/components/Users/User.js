@@ -1,4 +1,5 @@
 import style from "./Users.module.css";
+import styleApp from "../../App.css"
 import userPhoto from "../../assets/images/user.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
@@ -17,7 +18,7 @@ let User = ({user, followingInProgress, unfollow, follow}) => {
             <span>
                 <div>
                     {user.followed
-                        ? <button disabled={followingInProgress.some(id => id === user.id)}
+                        ? <button className={styleApp.button} disabled={followingInProgress.some(id => id === user.id)}
                                   onClick={() => {
                                       unfollow(user.id)
                                   }}>Unfollow</button>

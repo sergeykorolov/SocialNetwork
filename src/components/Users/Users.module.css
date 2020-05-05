@@ -1,4 +1,10 @@
 .userAvatar {
     width: 80px;
-    border-radius: 25px;
+    border-radius: 40px;
+}
+
+.users {
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+    margin-left: 20px;
 }

@@ -15,6 +15,6 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-const SidebarContainer = connect(mapStateToProps, mapDispatchToProps)(Navbar);
+const NavbarContainer = connect(mapStateToProps, mapDispatchToProps)(Navbar);
 
-export default SidebarContainer;
+export default NavbarContainer;

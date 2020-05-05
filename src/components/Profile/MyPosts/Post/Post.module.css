@@ -1,5 +1,6 @@
 .item {
-    color: azure;
+    color: dimgray;
+    padding: 10px;
 }
 
 .item img {
