@@ -12,7 +12,7 @@ const Dialogs = (props) => {
     let dialogsElements = props.dialogs
         .map(dialog => <DialogItem key={dialog.id} id={dialog.id} name={dialog.name} avatar={props.avatars[dialog.id-1].avatar}/>);
     let messagesElements = props.messages
-        .map(message => <Message message={message.message} avatar={props.avatars[message.id-1].avatar} profile={props.profile}/>);
+        .map(message => <Message key={message.id} message={message.message} avatar={props.avatars[message.id-1].avatar} profile={props.profile}/>);
 
     if (!props.isAuth) return <Redirect to={"/login"}/>
 

@@ -6,7 +6,7 @@ import Friends from "../Friends/Friends";
 const Navbar = (props) => {
 
     let NavbarElements = props.items
-        .map(item => <NavbarItem id={item.id} item={item.item} />);
+        .map(item => <NavbarItem key={item.id} id={item.id} item={item.item} />);
 
     // let friends = props.dialogs
     //     .map(dialog => <Friends id={dialog.id} name={dialog.name} avatar={props.avatars[dialog.id-1].avatar}/>);
