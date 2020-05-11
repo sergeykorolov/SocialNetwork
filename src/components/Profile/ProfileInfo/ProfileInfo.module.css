@@ -11,3 +11,13 @@
     width: 200px;
     border-radius: 100px;
 }
+
+.status {
+    vertical-align: top;
+}
+
+.statusBody{
+    display: inline-block;
+    width: 500px;
+    word-break: break-word;
+}

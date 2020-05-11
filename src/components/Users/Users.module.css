@@ -8,3 +8,7 @@
     grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
     margin-left: 20px;
 }
+
+.status {
+    word-break: break-word;
+}
