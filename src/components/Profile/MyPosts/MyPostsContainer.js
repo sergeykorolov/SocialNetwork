@@ -1,5 +1,5 @@
 import React from "react";
-import {addPost} from "../../../redux/profile-reducer";
+import {addPost, changeLikesCount} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 
@@ -8,9 +8,10 @@ let mapStateToProps = (state) => {
         posts: state.profilePage.posts,
         newPostText: state.profilePage.newPostText,
         avatars: state.profilePage.avatars,
+        userPhoto: state.profilePage.userProfile.photos.small
     }
 }
 
-const MyPostsContainer = connect(mapStateToProps, {addPost})(MyPosts);
+const MyPostsContainer = connect(mapStateToProps, {addPost, changeLikesCount})(MyPosts);
 
 export default MyPostsContainer;

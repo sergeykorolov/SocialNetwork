@@ -1,16 +1,18 @@
 import {profileApi} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {updateObjectInPostsArray} from "../utils/object-helpers";
 
 const ADD_POST = 'ADD-POST';
 const DELETE_POST = 'DELETE_POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
+const CHANGE_LIKES_COUNT = 'CHANGE_LIKES_COUNT';
 
 let initialState = {
     posts: [
-        {id: 1, message: 'Hi, how are you?', likesCount: 12},
-        {id: 2, message: "It's my first post", likesCount: 4}
+        {id: 1, message: 'Hi, how are you?', likesCount: 12, likeStatus: false},
+        {id: 2, message: "It's my first post", likesCount: 4, likeStatus: false}
     ],
     userProfile: null,
     status: ""
@@ -21,9 +23,10 @@ const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST: {
             let newPost = {
-                id: 3,
+                id: state.posts.length + 1,
                 message: action.newPostText,
-                likesCount: 0
+                likesCount: 0,
+                likeStatus: false
             };
             return {
                 ...state, posts: [...state.posts, newPost],
@@ -41,7 +44,16 @@ const profileReducer = (state = initialState, action) => {
             return {...state, status: action.status}
         }
         case SAVE_PHOTO_SUCCESS: {
-            return {...state, profile: {...state.profile, photos: action.photos}}
+            return {...state, userProfile: {...state.userProfile, photos: action.photos}}
+        }
+        case CHANGE_LIKES_COUNT: {
+            action.likeStatus ? action.likesCount++ : action.likesCount--;
+            return {
+                ...state,
+                posts: updateObjectInPostsArray(
+                    state.posts, action.postId, {likeStatus: action.likeStatus, likesCount: action.likesCount}
+                )
+            };
         }
         default:
             return state;
@@ -53,6 +65,7 @@ export const deletePost = (postId) => ({type: DELETE_POST, postId});
 export const setUserProfile = (userProfile) => ({type: SET_USER_PROFILE, userProfile});
 export const setStatus = (status) => ({type: SET_STATUS, status});
 export const savePhotoSuccess = (photos) => ({type: SAVE_PHOTO_SUCCESS, photos});
+export const changeLikesCount = (postId, likesCount, likeStatus) => ({type: CHANGE_LIKES_COUNT, postId, likesCount, likeStatus});
 
 export const getUserProfile = (userId) => async (dispatch) => {
     let response = await profileApi.getUserProfile(userId);

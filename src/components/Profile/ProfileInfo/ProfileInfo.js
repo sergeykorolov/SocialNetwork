@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import style from "./ProfileInfo.module.css";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
@@ -7,10 +7,15 @@ import ProfileDataForm from "./ProfileDataForm";
 const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, saveProfile}) => {
 
     let [editMode, setEditMode] = useState(false);
+    let [inputElement, setInputElement] = useState(null);
 
     const onMainPhotoSelected = (e) => {
         if (e.target.files.length) {
-            savePhoto(e.target.files[0]);
+            savePhoto(e.target.files[0]).then(
+                () => {
+                    setInputElement(null);
+                }
+            );
         }
     }
 
@@ -24,43 +29,55 @@ const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, savePro
 
     return (
         <div>
-            <div className={style.descriptionBlock}>
+            <div className={style.mainPhotoBlock}>
+                {isOwner &&
+                <div>
+                    <div className={style.editPhotoIcon} onClick={() => inputElement.click()}></div>
+                    <input className={style.alwaysHide}
+                           ref={input => setInputElement(input)}
+                           type={"file"}
+                           onChange={onMainPhotoSelected}/>
+                </div>
+                }
                 <img src={profile.photos.large || userPhoto} className={style.mainPhoto}/>
-                {isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>}
-                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
-
+            </div>
+            <div className={style.descriptionBlock}>
                 {editMode
                     ? <ProfileDataForm initialValues={profile} profile={profile} onSubmit={onSubmit}/>
-                    : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {
-                        setEditMode(true)
-                    }}/>}
+                    : <ProfileData profile={profile} status={status} updateStatus={updateStatus} isOwner={isOwner}
+                                   goToEditMode={() => {
+                                       setEditMode(true)
+                                   }}/>}
 
             </div>
         </div>
     )
 }
 
-const ProfileData = ({profile, isOwner, goToEditMode}) => {
+const ProfileData = ({profile, isOwner, goToEditMode, status, updateStatus}) => {
     return (
         <div>
+            <div><h3>{profile.fullName}</h3></div>
+            <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
+            <div><strong className={style.itemLabel}>Looking for a job:</strong>{profile.lookingForAJob ? "yes" : "no"}
+            </div>
+            {profile.lookingForAJob &&
+            <div><strong className={style.itemLabel}>My professional skills:</strong>{profile.lookingForAJobDescription}
+            </div>}
+
+            <div><strong className={style.itemLabel}>About me:</strong>{profile.aboutMe}</div>
+            <div><strong>Contacts:</strong>{Object.keys(profile.contacts).map(key => {
+                return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+            })}</div>
             {isOwner && <div>
                 <button onClick={goToEditMode}>edit</button>
             </div>}
-            <div><b>Full name</b>: {profile.fullName}</div>
-            <div><b>Looking for a job</b>: {profile.lookingForAJob ? "yes" : "no"}</div>
-            {profile.lookingForAJob &&
-            <div><b>My professional skills</b>: {profile.lookingForAJobDescription}</div>}
-
-            <div><b>About me</b>: {profile.aboutMe}</div>
-            <div><b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
-                return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
-            })}</div>
         </div>
     )
 }
 
 const Contact = ({contactTitle, contactValue}) => {
-    return <div className={style.contact}><b>{contactTitle}</b>: {contactValue}</div>
+    return <div><strong className={style.contact}>{contactTitle}:</strong> {contactValue}</div>
 }
 
 export default ProfileInfo;

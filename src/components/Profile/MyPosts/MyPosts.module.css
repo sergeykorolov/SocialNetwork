@@ -6,3 +6,8 @@
 .posts {
     margin-top: 10px;
 }
+
+.postsBlock textarea{
+    width: 475px;
+    height: 60px;
+}

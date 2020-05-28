@@ -16,5 +16,10 @@
 }
 
 .loginBlock a {
-    color: gray;
+    color: white;
+    margin-right: 10px;
+}
+
+.loginBlock a:hover {
+    text-decoration: none;
 }

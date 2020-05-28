@@ -7,30 +7,34 @@ import styleForm from '../../common/FormsControls/FormsControls.module.css';
 const ProfileDataForm = ({handleSubmit, profile, error}) => {
     return (
         <Form onSubmit={handleSubmit}>
-            <div><button>save</button></div>
             {error && <div className={styleForm.formSummaryError}>
                 {error}
             </div>
             }
             <div>
-                <b>Full name</b>: {createField("Full name", "fullName", [], Input)}
+                <strong className={style.itemLabel}>Full name:</strong>
+                <div className={style.input}>{createField("Full name", "fullName", [], Input)}</div>
             </div>
             <div>
-                <b>Looking for a job</b>: {createField("", "lookingForAJob", [], Input, {type: "checkbox"})}
+                <strong className={style.itemLabel}>Looking for a job:</strong>
+                <div className={style.checkbox}>{createField("", "lookingForAJob", [], Input, {type: "checkbox"})}</div>
             </div>
             <div>
-                <b>My professional skills</b>:
-                {createField("My professional skills", "lookingForAJobDescription", [], Textarea )}
+                <strong className={style.itemLabel}>My professional skills:</strong>
+                <div className={style.textarea}>{createField("My professional skills", "lookingForAJobDescription", [], Textarea )}</div>
             </div>
 
             <div>
-                <b>About me</b>: {createField("About me", "aboutMe", [], Textarea )}
+                <strong className={style.itemLabel}>About me:</strong>
+                <div className={style.textarea}>{createField("About me", "aboutMe", [], Textarea )}</div>
             </div>
-            <div><b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
-                return <div key={key} className={style.contact}>
-                    <b>{key}:</b> {createField(key, "contacts." + key, [], Input)}
+            <div><strong>Contacts:</strong> {Object.keys(profile.contacts).map(key => {
+                return <div key={key}>
+                    <strong className={style.contactForm}>{key}:</strong>
+                    <div className={style.input}>{createField(key, "contacts." + key, [], Input)}</div>
                 </div>
             })}</div>
+            <div><button>save</button></div>
         </Form>
     )
 }
