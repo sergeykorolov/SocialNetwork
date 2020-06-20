@@ -11,3 +11,16 @@
     width: 475px;
     height: 60px;
 }
+
+.newPost {
+    margin-left: 84px;
+}
+
+.add {
+    position: absolute;
+
+}
+
+.cancel {
+    margin-left: 60px;
+}

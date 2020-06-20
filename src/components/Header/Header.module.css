@@ -1,6 +1,9 @@
 .header {
-    grid-area: header;
-    background-color: #00a34a
+    /*grid-area: header;*/
+    /*background-color: #00a34a;*/
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .header img {

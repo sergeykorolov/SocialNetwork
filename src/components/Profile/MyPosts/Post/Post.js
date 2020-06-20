@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import style from './Post.module.css';
 import photo from "../../../../assets/images/user.png"
 import likeActive from "../../../../assets/images/likeActive.svg"
@@ -15,12 +15,14 @@ const Post = (props) => {
             <div className={style.photo}><img src={props.userPhoto || photo}/></div>
             <div className={style.message}>
                 {props.message}
-                <div className={style.like}>
-                    {props.likeStatus
-                        ? <img src={likeActive} onClick={changeLikesCount}/>
-                        : <img src={likeNotActive} onClick={changeLikesCount}/>
-                    }
-                    <div>{props.likesCount}</div>
+                <div className={style.like} onClick={changeLikesCount}>
+                    <div className={style.likeStatus}>
+                        {props.likeStatus
+                            ? <img src={likeActive}/>
+                            : <img src={likeNotActive}/>
+                        }
+                    </div>
+                    <div className={style.likesCount}>{props.likesCount}</div>
                 </div>
             </div>
         </div>

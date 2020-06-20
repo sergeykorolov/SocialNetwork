@@ -7,21 +7,28 @@
 .mainPhotoBlock {
     float: right;
     margin-right: 20px;
-    width: 400px;
+    width: 250px;
 }
 
 .mainPhoto {
     width: 200px;
     border-radius: 100px;
     float: right;
-    margin-right: -25px;
 }
 
 .editPhotoIcon {
     background: url("../../../assets/images/pencil.png");
     float: right;
+    margin-left: 213px;
     width: 32px;
     height: 32px;
+    position: absolute;
+    cursor: pointer;
+    display: none;
+}
+
+.mainPhotoBlock:hover .editPhotoIcon{
+    display: block;
 }
 
 .itemLabel {

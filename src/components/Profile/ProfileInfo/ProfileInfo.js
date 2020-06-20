@@ -30,6 +30,7 @@ const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, savePro
     return (
         <div>
             <div className={style.mainPhotoBlock}>
+                <img src={profile.photos.large || userPhoto} className={style.mainPhoto}/>
                 {isOwner &&
                 <div>
                     <div className={style.editPhotoIcon} onClick={() => inputElement.click()}></div>
@@ -39,7 +40,6 @@ const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, savePro
                            onChange={onMainPhotoSelected}/>
                 </div>
                 }
-                <img src={profile.photos.large || userPhoto} className={style.mainPhoto}/>
             </div>
             <div className={style.descriptionBlock}>
                 {editMode

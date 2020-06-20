@@ -6,10 +6,6 @@ import style from "./Users.module.css";
 let Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, ...props}) => {
     return (
         <div>
-            <Paginator currentPage={currentPage}
-                       onPageChanged={onPageChanged}
-                       totalItemsCount={totalUsersCount}
-                       pageSize={pageSize}/>
             <div className={style.users}>
                 {
                     users.map(user => <User user={user}
@@ -19,6 +15,12 @@ let Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, ...p
                                             key={user.id}
                     />)
                 }
+            </div>
+            <div className={style.paginator}>
+                <Paginator currentPage={currentPage}
+                           onPageChanged={onPageChanged}
+                           totalItemsCount={totalUsersCount}
+                           pageSize={pageSize}/>
             </div>
         </div>
     )

@@ -22,3 +22,12 @@
     width: 20px;
     cursor: pointer;
 }
+
+.likeStatus {
+    position: absolute;
+    width: 20px;
+}
+
+.likesCount {
+    margin-left: 28px;
+}

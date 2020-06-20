@@ -31,6 +31,7 @@ class App extends Component {
         this.props.initializeApp();
         window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
     }
+
     componentWillUnmount() {
         window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
     }
@@ -43,26 +44,29 @@ class App extends Component {
 
         return (
             <div className='app-wrapper'>
-                <HeaderContainer/>
-                <NavbarContainer/>
+                <div className='backHeader'><HeaderContainer/></div>
+                <div className='backImg'></div>
                 <Suspense fallback={<Preloader/>}>
                     <div className='app-wrapper-content'>
-                        <Switch>
-                            <Route path='/messages'
-                                   render={() => <DialogsContainer/>}/>
-                            <Route
-                                path='/profile/:userId?'
-                                render={() => <ProfileContainer/>}/>
-                            <Route path='/users'
-                                   render={() => <UsersContainer/>}/>
-                            <Route path='/news' component={News}/>
-                            <Route path='/music' component={Music}/>
-                            <Route path='/settings' component={Settings}/>
-                            <Route path='/subscriptions'
-                                   render={() => <FriendsContainer/>}/>
-                            <Route path='/login' render={() => <Login/>}/>
-                            <Redirect from='/' to='/profile'/>
-                        </Switch>
+                        <div className='contentBlock'>
+                            <NavbarContainer/>
+                            <Switch>
+                                <Route path='/messages'
+                                       render={() => <DialogsContainer/>}/>
+                                <Route
+                                    path='/profile/:userId?'
+                                    render={() => <ProfileContainer/>}/>
+                                <Route path='/users'
+                                       render={() => <UsersContainer/>}/>
+                                <Route path='/news' component={News}/>
+                                <Route path='/music' component={Music}/>
+                                <Route path='/settings' component={Settings}/>
+                                <Route path='/subscriptions'
+                                       render={() => <FriendsContainer/>}/>
+                                <Route path='/login' render={() => <Login/>}/>
+                                <Redirect from='/' to='/profile'/>
+                            </Switch>
+                        </div>
                     </div>
                 </Suspense>
             </div>
