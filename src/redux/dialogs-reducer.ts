@@ -1,5 +1,20 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
 
+type DialogType = {
+    id: number
+    name: string
+}
+
+type MessageType = {
+    id: number
+    message: string
+}
+
+type AvatarType = {
+    id: number
+    avatar: string
+}
+
 let initialState = {
     dialogs: [
         {id: 1, name: 'Cartman'},
@@ -8,14 +23,14 @@ let initialState = {
         {id: 4, name: 'Kyle'},
         {id: 5, name: 'Shef'},
         {id: 6, name: 'Mr.Garrison'}
-    ],
+    ] as Array<DialogType>,
     messages: [
         {id: 1, message: 'Guys i hate you'},
         {id: 2, message: 'Mmmm mmm'},
         {id: 3, message: 'Cartman Fat Ass'},
         {id: 4, message: 'You bastard!!!'},
         {id: 5, message: 'Hello children!'}
-    ],
+    ] as Array<MessageType>,
     avatars: [
         {
             id: 1,
@@ -41,10 +56,12 @@ let initialState = {
             id: 6,
             avatar: 'https://i.pinimg.com/564x/8c/e1/7f/8ce17f240c7683e1f531c677a5fb8109.jpg'
         }
-    ],
+    ] as Array<AvatarType>,
 }
 
-const dialogsReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState; // создаем тип для initialState
+
+const dialogsReducer = (state = initialState, action: any): InitialStateType => {
 
     switch (action.type) {
         case ADD_MESSAGE: {
@@ -58,6 +75,11 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const addMessage = (newMessageText) => ({type: ADD_MESSAGE, newMessageText});
+type AddMessageActionType = {
+    type: typeof ADD_MESSAGE
+    newMessageText: string
+}
+
+export const addMessage = (newMessageText: string): AddMessageActionType  => ({type: ADD_MESSAGE, newMessageText});
 
 export default dialogsReducer;

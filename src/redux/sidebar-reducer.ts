@@ -1,4 +1,9 @@
 
+type ItemType = {
+    id: number
+    item: string
+}
+
 let initialState = {
     items: [
         {id: 1, item: 'Profile'},
@@ -8,10 +13,12 @@ let initialState = {
         {id: 5, item: 'Music'},
         {id: 6, item: 'Settings'},
         {id: 7, item: 'Subscriptions'}
-    ]
+    ] as Array<ItemType>
 }
 
-const sidebarReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState; // задает тип по объекту initialState
+
+const sidebarReducer = (state = initialState, action: any): InitialStateType => {
 
     return state;
 }

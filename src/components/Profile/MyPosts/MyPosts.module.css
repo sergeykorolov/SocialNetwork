@@ -1,6 +1,8 @@
 .postsBlock {
     padding: 20px;
-    color: dimgray;
+    background: white;
+    margin: 10px;
+    box-shadow: 2px 2px 5px 0 #00000059;
 }
 
 .posts {

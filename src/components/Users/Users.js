@@ -5,7 +5,7 @@ import style from "./Users.module.css";
 
 let Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, ...props}) => {
     return (
-        <div>
+        <div className={style.usersBlock}>
             <div className={style.users}>
                 {
                     users.map(user => <User user={user}

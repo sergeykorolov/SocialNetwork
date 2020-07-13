@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import style from "./ProfileInfo.module.css";
 import userPhoto from "../../../assets/images/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
@@ -28,7 +28,7 @@ const ProfileInfo = ({isOwner, profile, status, updateStatus, savePhoto, savePro
     }
 
     return (
-        <div>
+        <div className={style.profileInfoBlock}>
             <div className={style.mainPhotoBlock}>
                 <img src={profile.photos.large || userPhoto} className={style.mainPhoto}/>
                 {isOwner &&
