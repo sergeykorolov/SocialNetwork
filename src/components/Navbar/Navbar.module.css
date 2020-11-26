@@ -1,17 +1,20 @@
 .nav {
     grid-area: nav;
-    margin-top: 10px;
-    background-color: #007c33;
-    padding: 10px;
+    margin-top: 5px;
 }
 
 .item a {
-    color: azure;
+    color: #2f9c30;
     text-decoration: none;
+    width: 80%;
+    display: block;
+    padding: 5px;
+    border-radius: 3px;
+    transition: all 0.1s linear;
 }
 
-.item a.activeLink {
-    color: gold;
+.item a:hover, .item a.activeLink {
+    background-color: #d4d4d4;
 }
 
 .friendsWrapper {

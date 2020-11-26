@@ -1,9 +1,14 @@
-import React from "react";
+import React, {FC} from "react";
 import style from './Navbar.module.css';
 import NavbarItem from "./NavbarItem/NavbarItem";
 import Friends from "../Friends/Friends";
+import {NavbarItemType} from "../../types/types";
 
-const Navbar = (props) => {
+type PropsType = {
+    items: Array<NavbarItemType>
+}
+
+const Navbar: FC<PropsType> = (props) => {
 
     let NavbarElements = props.items
         .map(item => <NavbarItem key={item.id} id={item.id} item={item.item} />);

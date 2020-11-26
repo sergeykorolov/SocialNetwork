@@ -1,19 +1,6 @@
+import {AvatarType, DialogType, MessageType} from "../types/types";
+
 const ADD_MESSAGE = 'ADD-MESSAGE';
-
-type DialogType = {
-    id: number
-    name: string
-}
-
-type MessageType = {
-    id: number
-    message: string
-}
-
-type AvatarType = {
-    id: number
-    avatar: string
-}
 
 let initialState = {
     dialogs: [
@@ -61,7 +48,7 @@ let initialState = {
 
 export type InitialStateType = typeof initialState; // создаем тип для initialState
 
-const dialogsReducer = (state = initialState, action: any): InitialStateType => {
+const dialogsReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
 
     switch (action.type) {
         case ADD_MESSAGE: {
@@ -74,6 +61,8 @@ const dialogsReducer = (state = initialState, action: any): InitialStateType => 
             return state;
     }
 }
+
+type ActionsTypes = AddMessageActionType
 
 type AddMessageActionType = {
     type: typeof ADD_MESSAGE

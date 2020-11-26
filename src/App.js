@@ -22,7 +22,7 @@ const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileCo
 class App extends Component {
 
     catchAllUnhandledErrors = (promiseRejectionEvent) => {
-        alert("Some error occured");
+        // alert("Some error occured");
         // console.error(promiseRejectionEvent);
     }
 
@@ -50,22 +50,25 @@ class App extends Component {
                     <div className='app-wrapper-content'>
                         <div className='contentBlock'>
                             <NavbarContainer/>
-                            <Switch>
+                            <div>
                                 <Route path='/messages'
-                                       render={() => <DialogsContainer/>}/>
+                                       render={() => <div className='blockInsideContent'><DialogsContainer/></div>}/>
                                 <Route
                                     path='/profile/:userId?'
-                                    render={() => <ProfileContainer/>}/>
+                                    render={() => <div><ProfileContainer/></div>}/>
                                 <Route path='/users'
-                                       render={() => <UsersContainer/>}/>
-                                <Route path='/news' component={News}/>
-                                <Route path='/music' component={Music}/>
-                                <Route path='/settings' component={Settings}/>
+                                       render={() => <div className='blockInsideContent'><UsersContainer pageTitle="Самураи"/></div>}/>
+                                <Route path='/news'
+                                       render={() => <div className='blockInsideContent'><News/></div>}/>
+                                <Route path='/music'
+                                    render={() => <div className='blockInsideContent'><Music/></div>}/>
+                                <Route path='/settings'
+                                    render={() => <div className='blockInsideContent'><Settings/></div>}/>
                                 <Route path='/subscriptions'
-                                       render={() => <FriendsContainer/>}/>
-                                <Route path='/login' render={() => <Login/>}/>
+                                       render={() => <div className='blockInsideContent'><FriendsContainer/></div>}/>
+                                <Route path='/login' render={() => <div className='blockInsideContent'><Login/></div>}/>
                                 <Redirect from='/' to='/profile'/>
-                            </Switch>
+                            </div>
                         </div>
                     </div>
                 </Suspense>

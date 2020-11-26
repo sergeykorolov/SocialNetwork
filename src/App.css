@@ -1,21 +1,18 @@
 .app-wrapper {
-  display: grid;
-  width: 100%;
-  margin: 0 auto;
+    display: grid;
+    width: 100%;
+    margin: 0 auto;
 
-  grid-template-areas:
-  "header header"
-  "backImg backImg"
-  "content content";
+    grid-template-areas: "header header" "backImg backImg" "content content";
 
-  grid-template-rows: 60px 150px 1fr;
-  grid-template-columns: 2fr 10fr;
-  /*grid-gap: 10px;*/
+    grid-template-rows: 60px 150px 1fr;
+    grid-template-columns: 2fr 10fr;
+    /*grid-gap: 10px;*/
 }
 
 .app-wrapper-content {
-  grid-area: content;
-  background-color: #ddd
+    grid-area: content;
+    background-color: #ddd;
 }
 
 .backHeader {
@@ -32,25 +29,45 @@
 
 .contentBlock {
     display: grid;
-    grid-template-areas:
-            "nav content";
-    grid-template-columns: 20% 80%;
+    grid-template-areas: "nav content";
+    grid-template-columns: 15% 85%;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
+.blockInsideContent {
+    background: white;
+    padding: 20px;
+    margin: 10px;
+    margin-top: -50px;
+    box-shadow: 2px 2px 5px 0 #00000059;
+    min-height: 500px;
+    position: relative;
+}
+
 button {
-  background-color: #2f9c30;
-  border: none;
-  color: white;
-  padding: 5px 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 13px;
-  border-radius: 2px;
-  cursor: pointer;
+    background-color: #2f9c30;
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: "Roboto";
+    transition: all 0.1s linear;
+}
+
+button:hover {
+    background-color: #237524;
+}
+
+button:focus, input:focus, textarea:focus {
+    outline: none;
 }
 
 

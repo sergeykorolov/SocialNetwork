@@ -2,17 +2,19 @@ import {profileApi} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {updateObjectInPostsArray} from "../utils/object-helpers";
 import {PhotosType, PostType, ProfileType} from "../types/types";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./redux-store";
 
-const ADD_POST = 'ADD-POST';
-const DELETE_POST = 'DELETE_POST';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_STATUS = 'SET_STATUS';
-const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
-const CHANGE_LIKES_COUNT = 'CHANGE_LIKES_COUNT';
+const ADD_POST = "ADD-POST";
+const DELETE_POST = "DELETE_POST";
+const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_STATUS = "SET_STATUS";
+const SAVE_PHOTO_SUCCESS = "SAVE_PHOTO_SUCCESS";
+const CHANGE_LIKES_COUNT = "CHANGE_LIKES_COUNT";
 
 let initialState = {
     posts: [
-        {id: 1, message: 'Hi, how are you?', likesCount: 12, likeStatus: false},
+        {id: 1, message: "Hi, how are you?", likesCount: 12, likeStatus: false},
         {id: 2, message: "It's my first post", likesCount: 4, likeStatus: false}
     ] as Array<PostType>,
     userProfile: null as ProfileType | null,
@@ -21,7 +23,7 @@ let initialState = {
 
 export type InitialStateType = typeof initialState; // задает тип по объекту initialState
 
-const profileReducer = (state = initialState, action: any): InitialStateType => {
+const profileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
 
     switch (action.type) {
         case ADD_POST: {
@@ -63,6 +65,9 @@ const profileReducer = (state = initialState, action: any): InitialStateType => 
     }
 }
 
+type ActionsTypes = AddPostActionType | DeletePostActionType
+    | SetUserProfileActionType | SetStatusActionType | SavePhotoSuccessActionType | ChangeLikesCountActionType
+
 type AddPostActionType = {
     type: typeof ADD_POST
     newPostText: string
@@ -96,36 +101,40 @@ type ChangeLikesCountActionType = {
 }
 export const changeLikesCount = (postId: number, likesCount: number, likeStatus: boolean): ChangeLikesCountActionType => ({type: CHANGE_LIKES_COUNT, postId, likesCount, likeStatus});
 
-export const getUserProfile = (userId: number) => async (dispatch: any) => {
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+
+export const getUserProfile = (userId: number): ThunkType => async (dispatch) => {
     let response = await profileApi.getUserProfile(userId);
     dispatch(setUserProfile(response.data));
 }
 
-export const getStatus = (userId: number) => async (dispatch: any) => {
+export const getStatus = (userId: number): ThunkType => async (dispatch) => {
     let response = await profileApi.getStatus(userId);
     dispatch(setStatus(response.data));
 }
 
-export const updateStatus = (status: string) => async (dispatch: any) => {
+export const updateStatus = (status: string): ThunkType => async (dispatch) => {
     let response = await profileApi.updateStatus(status);
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status));
     }
 }
 
-export const savePhoto = (file: any) => async (dispatch: any) => {
+export const savePhoto = (file: any): ThunkType => async (dispatch) => {
     let response = await profileApi.savePhoto(file);
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos));
     }
 }
 
-export const saveProfile = (profile: ProfileType) => async (dispatch: any, getState: any) => {
+export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch, getState) => {
     const userId = getState().auth.userId;
     const response = await profileApi.saveProfile(profile);
     if (response.data.resultCode === 0) {
+        // @ts-ignore
         dispatch(getUserProfile(userId));
     } else {
+        // @ts-ignore
         dispatch(stopSubmit("edit-profile", {_error: response.data.messages[0]}));
         return Promise.reject(response.data.messages[0]);
     }

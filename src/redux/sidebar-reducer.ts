@@ -1,8 +1,4 @@
-
-type ItemType = {
-    id: number
-    item: string
-}
+import {NavbarItemType} from "../types/types";
 
 let initialState = {
     items: [
@@ -13,7 +9,7 @@ let initialState = {
         {id: 5, item: 'Music'},
         {id: 6, item: 'Settings'},
         {id: 7, item: 'Subscriptions'}
-    ] as Array<ItemType>
+    ] as Array<NavbarItemType>
 }
 
 export type InitialStateType = typeof initialState; // задает тип по объекту initialState

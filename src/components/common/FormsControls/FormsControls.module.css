@@ -1,15 +1,13 @@
-.form-control {
-
+.formControl {
+    display: inline-block;
 }
 
 .formControl.error input,
-.formControl.error textarea
-{
+.formControl.error textarea {
     border: solid red 2px;
 }
 
-.formControl.error span
-{
+.formControl.error span {
     color: red;
 }
 
@@ -17,4 +15,17 @@
     border: red 1px solid;
     padding: 5px;
     color: brown;
+}
+
+input, textarea {
+    border: 1px solid #c3c3c3;
+    border-radius: 3px;
+    color: #737373;
+    margin-bottom: 5px;
+    padding: 2px 0 2px 5px;
+}
+
+textarea {
+    min-height: 50px;
+    min-width: 300px;
 }

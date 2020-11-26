@@ -2,3 +2,15 @@
     padding-left: 20px;
     color: dimgray;
 }
+
+.hint {
+    margin-top: 20px;
+}
+
+.checkbox {
+    display: inline-block;
+}
+
+.loginButton {
+    margin-top: 5px;
+}

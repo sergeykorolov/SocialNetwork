@@ -26,11 +26,15 @@ const MyPosts = (props) => {
     return (
         <div className={style.postsBlock}>
             <h3>My posts</h3>
-            {! newPostField
-                ? <button onClick={() => setNewPostField(true)}>Add new post</button>
-                : <div className={style.newPost}>
-                    <AddNewPostReduxForm setNewPostField={setNewPostField} onSubmit={onAddPost}/>
-                    <button className={style.cancel} onClick={() => setNewPostField(false)}>Cancel</button>
+            {props.isOwner &&
+                <div>
+                    {! newPostField
+                        ? <button onClick={() => setNewPostField(true)}>Add new post</button>
+                        : <div className={style.newPost}>
+                            <AddNewPostReduxForm setNewPostField={setNewPostField} onSubmit={onAddPost}/>
+                            <button className={style.cancel} onClick={() => setNewPostField(false)}>Cancel</button>
+                        </div>
+                    }
                 </div>
             }
             <div className={style.posts}>{postsElements}</div>

@@ -25,6 +25,7 @@ export type ProfileType = {
     fullName: string
     contacts: ContactsType
     photos: PhotosType
+    aboutMe: string
 }
 export type UserType = {
     id: number
@@ -32,4 +33,20 @@ export type UserType = {
     status: string
     photos: PhotosType
     followed: boolean
+}
+export type DialogType = {
+    id: number
+    name: string
+}
+export type MessageType = {
+    id: number
+    message: string
+}
+export type AvatarType = {
+    id: number
+    avatar: string
+}
+export type NavbarItemType = {
+    id: number
+    item: string
 }

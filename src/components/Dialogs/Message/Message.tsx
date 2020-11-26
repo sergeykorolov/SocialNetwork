@@ -1,7 +1,12 @@
 import style from "../Dialogs.module.css";
-import React from "react";
+import React, {FC} from "react";
 
-const Message = (props) => {
+type PropsType = {
+    avatar: string
+    message: string
+}
+
+const Message: FC<PropsType> = (props) => {
     return (
         <div className={style.message}>
             <img src={props.avatar}/>

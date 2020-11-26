@@ -1,8 +1,13 @@
-import React from "react";
+import React, {FC} from "react";
 import style from "../Navbar.module.css";
 import {NavLink} from "react-router-dom";
 
-const NavbarItem = (props) => {
+type PropsType = {
+    item: string
+    id: number
+}
+
+const NavbarItem: FC<PropsType> = (props) => {
 
     let path = "/" + props.item.toLowerCase();
 

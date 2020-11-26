@@ -4,8 +4,17 @@ import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {addMessage} from "../../redux/dialogs-reducer";
+import {AppStateType} from "../../redux/redux-store";
+import {AvatarType, DialogType, MessageType, ProfileType} from "../../types/types";
 
-let mapStateToProps = (state) => {
+type MapStatePropsType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    avatars: Array<AvatarType>
+    profile: ProfileType | null,
+}
+
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,

@@ -1,7 +1,16 @@
 .item {
     color: dimgray;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 5px;
+    margin-bottom: 10px;
+    height: 60px;
+    width: 500px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.1s linear;
+}
+
+.item:hover {
+    background-color: #efefef;
 }
 
 .photo img {
