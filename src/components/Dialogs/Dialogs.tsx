@@ -39,6 +39,7 @@ const Dialogs: FC<DialogsPropsType> = (props) => {
                 {messagesElements}
             </div>
             <AddMessageReduxForm onSubmit={addMessage}/>
+            
         </div>
     )
 }

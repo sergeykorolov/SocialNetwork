@@ -2,6 +2,7 @@ import {authApi, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./redux-store";
+import {Dispatch} from "redux";
 
 const SET_USER_DATA = 'book-face/auth/SET_USER_DATA';
 const GET_CAPTCHA_URL_SUCCESS = 'book-face/auth/GET_CAPTCHA_URL_SUCCESS';
@@ -32,37 +33,39 @@ const authReducer = (state = initialState, action: ActionsTypes): InitialStateTy
     }
 }
 
-type ActionsTypes = SetAuthUserDataActionType | GetCaptchaUrlSuccessActionType
+type ActionsTypes = SetAuthUserDataType | GetCaptchaUrlSuccessType
 
 // тип для объекта payload
-type SetAuthUserDataActionPayloadType = {
+type SetAuthUserDataPayloadType = {
     userId: number | null
     email: string | null
     login: string | null
     isAuth: boolean
 }
 // тип для экшна setAuthUserData
-type SetAuthUserDataActionType = {
+type SetAuthUserDataType = {
     type: typeof SET_USER_DATA, // typeof вытаскивает значение константы
-    payload: SetAuthUserDataActionPayloadType
+    payload: SetAuthUserDataPayloadType
 }
 // функции возвращают экшны (объект, у которого есть как минимум св-во type)
-export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean): SetAuthUserDataActionType => ({
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean): SetAuthUserDataType => ({
     type: SET_USER_DATA,
     payload: {userId, email, login, isAuth}
 });
 
 // тип для экшна getCaptchaUrlSuccess
-type GetCaptchaUrlSuccessActionType = {
+type GetCaptchaUrlSuccessType = {
     type: typeof GET_CAPTCHA_URL_SUCCESS,
     payload: {captchaUrl: string}
 }
 
-export const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessActionType => ({
+export const getCaptchaUrlSuccess = (captchaUrl: string): GetCaptchaUrlSuccessType => ({
     type: GET_CAPTCHA_URL_SUCCESS,
     payload: {captchaUrl}
 });
 
+type GetStateType = () => AppStateType;
+type DispatchType = Dispatch<ActionsTypes>;
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
 // thunks
@@ -72,27 +75,27 @@ export const getAuthUserData = (): ThunkType => async (dispatch) => {
         let {id, email, login} = response.data.data;
         dispatch(setAuthUserData(id, email, login, true));
     }
-}
+};
 
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string):ThunkType => async (dispatch) => {
     let response = await authApi.login(email, password, rememberMe, captcha);
     if (response.data.resultCode === 0) {
-        dispatch(getAuthUserData());
+        await dispatch(getAuthUserData());
     } else {
         if (response.data.resultCode === 10) {
-            dispatch(getCaptchaUrl());
+            await dispatch(getCaptchaUrl());
         }
         let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
         // @ts-ignore
-        dispatch(stopSubmit("login", {_error: message}));
+      dispatch(stopSubmit("login", {_error: message}));
     }
-}
+};
 
 export const getCaptchaUrl = ():ThunkType => async (dispatch) => {
     const response = await securityAPI.getCaptchaUrl();
     const captchaUrl = response.data.url;
     dispatch(getCaptchaUrlSuccess(captchaUrl));
-}
+};
 
 export const logout = ():ThunkType => async (dispatch) => {
     let response = await authApi.logout();

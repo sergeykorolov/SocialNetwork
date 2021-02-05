@@ -63,7 +63,7 @@ const profileReducer = (state = initialState, action: ActionsTypes): InitialStat
         default:
             return state;
     }
-}
+};
 
 type ActionsTypes = AddPostActionType | DeletePostActionType
     | SetUserProfileActionType | SetStatusActionType | SavePhotoSuccessActionType | ChangeLikesCountActionType
@@ -106,38 +106,38 @@ type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 export const getUserProfile = (userId: number): ThunkType => async (dispatch) => {
     let response = await profileApi.getUserProfile(userId);
     dispatch(setUserProfile(response.data));
-}
+};
 
 export const getStatus = (userId: number): ThunkType => async (dispatch) => {
     let response = await profileApi.getStatus(userId);
     dispatch(setStatus(response.data));
-}
+};
 
 export const updateStatus = (status: string): ThunkType => async (dispatch) => {
     let response = await profileApi.updateStatus(status);
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status));
     }
-}
+};
 
 export const savePhoto = (file: any): ThunkType => async (dispatch) => {
     let response = await profileApi.savePhoto(file);
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos));
     }
-}
+};
 
 export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch, getState) => {
     const userId = getState().auth.userId;
     const response = await profileApi.saveProfile(profile);
     if (response.data.resultCode === 0) {
         // @ts-ignore
-        dispatch(getUserProfile(userId));
+      await dispatch(getUserProfile(userId));
     } else {
         // @ts-ignore
-        dispatch(stopSubmit("edit-profile", {_error: response.data.messages[0]}));
+      dispatch(stopSubmit("edit-profile", {_error: response.data.messages[0]}));
         return Promise.reject(response.data.messages[0]);
     }
-}
+};
 
 export default profileReducer;

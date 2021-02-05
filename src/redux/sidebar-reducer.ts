@@ -10,13 +10,12 @@ let initialState = {
         {id: 6, item: 'Settings'},
         {id: 7, item: 'Subscriptions'}
     ] as Array<NavbarItemType>
-}
+};
 
 export type InitialStateType = typeof initialState; // задает тип по объекту initialState
 
-const sidebarReducer = (state = initialState, action: any): InitialStateType => {
-
+const sidebarReducer = (state = initialState): InitialStateType => {
     return state;
-}
+};
 
 export default sidebarReducer;

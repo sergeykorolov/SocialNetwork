@@ -44,7 +44,7 @@ let initialState = {
             avatar: 'https://i.pinimg.com/564x/8c/e1/7f/8ce17f240c7683e1f531c677a5fb8109.jpg'
         }
     ] as Array<AvatarType>,
-}
+};
 
 export type InitialStateType = typeof initialState; // создаем тип для initialState
 
@@ -60,15 +60,15 @@ const dialogsReducer = (state = initialState, action: ActionsTypes): InitialStat
         default:
             return state;
     }
-}
+};
 
-type ActionsTypes = AddMessageActionType
+type ActionsTypes = AddMessageType
 
-type AddMessageActionType = {
+type AddMessageType = {
     type: typeof ADD_MESSAGE
     newMessageText: string
 }
 
-export const addMessage = (newMessageText: string): AddMessageActionType  => ({type: ADD_MESSAGE, newMessageText});
+export const addMessage = (newMessageText: string): AddMessageType  => ({type: ADD_MESSAGE, newMessageText});
 
 export default dialogsReducer;
